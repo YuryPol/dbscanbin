@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,7 @@ public class App
 	        String line = "";
 	        String cvsSplitBy = ",";
 	        
+	        System.out.println("Started at " + Calendar.getInstance().getTime());
 	        Map<String, Long> showsMap = new HashMap<String, Long>();
 	        List<BinaryPoint> points = new ArrayList<BinaryPoint>();
 
@@ -47,8 +49,8 @@ public class App
                 		continue; // viewed too many shows, probably TV junky or bot 
                 	
 	                int weight = Integer.valueOf(shows[shows.length - 1]);
-	                if (weight <= MIN_VIEWERS_INGROUP_NUMBER) // the data were sorted in weight descended order
-	                	continue; //too few viewers in the group
+//	                if (weight <= MIN_VIEWERS_INGROUP_NUMBER) // the data were sorted in weight descended order
+//	                	continue; //too few viewers in the group
                 	
         	        Long coordinates = new Long(0);
                 	Long bits;
@@ -85,7 +87,7 @@ public class App
 	            	bw.write(" -- with " + c.getPoints().size() + " points\n");
 	                for (BinaryPoint pt: c.getPoints())
 	                {
-	                	bw.write(String.format("%16s", Long.toBinaryString(pt.coordinates).replace('0', ' ').replace('1', '*')) + "\n");
+	                	bw.write(String.format("%60s", Long.toBinaryString(pt.coordinates).replace('0', ' ').replace('1', '*')) + "\n");
 	                }
 	            }                       
 				bw.close();
@@ -102,7 +104,7 @@ public class App
 	                }
 	            }
 	        }
-
+	        System.out.println("Ended at " + Calendar.getInstance().getTime());
 	}
 
 }
